@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core import views
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'categories', views.CategoryModelViewSet, basename="category")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path("currencies/", views.CurrencyListAPiView.as_view(), name="currencies")
+] + router.urls
