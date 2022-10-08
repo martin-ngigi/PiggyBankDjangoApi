@@ -1,4 +1,5 @@
 from dataclasses import fields
+from unicodedata import category
 from rest_framework import serializers
 
 # A serializer is used to transform data from pyhthon format to json object
@@ -34,21 +35,26 @@ class WriteTransactionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReadTransactionSerializer(serializers.ModelSerializer):
-    # the GET Will return TransactionSerializer and CurrencySerializer inside of TransactionSerializer in the "currency":""
+    # return nested object
+    # the GET Will return TransactionSerializer and CurrencySerializer inside of TransactionSerializer in the "currency":"" and "category":""
     # eg
-    #   {
+    # {
     #     "id": 1,
     #     "currency": {
     #         "id": 2,
     #         "code": "Ksh",
     #         "name": "Kenyan Currency"
     #     },
+    #     "category": {
+    #         "id": 3,
+    #         "name": "Transport"
+    #     },
     #     "amount": "30.00",
     #     "date": "2022-08-10T09:22:33Z",
-    #     "description": "Testing USA currency",
-    #     "category": 3
+    #     "description": "Testing USA currency"
     # },
     currency = CurrencySerializer()
+    category = CategorySerializer()
 
     class Meta:
         model = Transaction
