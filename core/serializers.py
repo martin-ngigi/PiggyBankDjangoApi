@@ -1,6 +1,7 @@
 from dataclasses import fields
 from unicodedata import category
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 # A serializer is used to transform data from pyhthon format to json object
 
@@ -17,6 +18,12 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+class ReadUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+        read_only_fields = fields
 
 class WriteTransactionSerializer(serializers.ModelSerializer):
     # While inserting currency, intead of using id of currency, use text instead and afterwards display all currencies in text form
@@ -53,6 +60,8 @@ class ReadTransactionSerializer(serializers.ModelSerializer):
     #     "date": "2022-08-10T09:22:33Z",
     #     "description": "Testing USA currency"
     # },
+    
+    # user = ReadUserSerializer()
     currency = CurrencySerializer()
     category = CategorySerializer()
 

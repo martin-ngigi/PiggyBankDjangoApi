@@ -96,3 +96,19 @@ from locale import currency
 # endpoint -> http://127.0.0.1:8000/transactions/2/
 
 
+# AUTHENTICATION 
+# --------------------
+# python manage.py createsuperuser
+# 1.POST - endpont -> http://127.0.0.1:8000/login/
+# body , select raw, selct json and paste the following
+# {
+#     "username":"martin",
+#     "password":"martin"
+# }
+# Then press send to get the authorization token ie a5af394723a8b2246606e8e408c4e6bb2216c4ae
+# 2. To authenticate
+# send token
+# in the GET Transaction select "Authorization", In the "Type" select "API key". 
+# Then insert the following
+# Key -> Authorization
+# Value -> Token a5af394723a8b2246606e8e408c4e6bb2216c4ae

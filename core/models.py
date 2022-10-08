@@ -1,6 +1,9 @@
+from email.policy import default
 from enum import unique
+from tkinter import CASCADE
 from unicodedata import category
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,6 +15,7 @@ class Currency(models.Model):
         return self.name
 
 class Category(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,  related_name="categories", default=1) #on deleting user. delete all other models relating to the user
     name = models.CharField(max_length=32, blank=True)
 
     
@@ -19,6 +23,7 @@ class Category(models.Model):
         return self.name
 
 class Transaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,  related_name="transactions", default=1) #on deleting user. delete all other models relating to the user
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="transactions")#prevent deleting when currency is deleted
     date = models.DateTimeField()

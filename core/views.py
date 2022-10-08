@@ -7,6 +7,8 @@ from rest_framework import status
 from rest_framework.filters import SearchFilter, OrderingFilter
 # from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.permissions import IsAuthenticated
+
 
 from core.models import Category, Currency, Transaction
 from core.serializers import CategorySerializer, CurrencySerializer, ReadTransactionSerializer, WriteTransactionSerializer
@@ -21,14 +23,24 @@ class CurrencyListAPiView(ListAPIView):
     serializer_class = CurrencySerializer
 
 class CurrencyModelViewSet(ModelViewSet):
+    # AUTHENTICATION
+    permission_classes = (IsAuthenticated,) #first authenticate carrying out any category
+
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
 
 class CategoryModelViewSet(ModelViewSet):
+     # AUTHENTICATION
+    permission_classes = (IsAuthenticated,) #first authenticate carrying out any category
+
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 class TransactionModelViewSet(ModelViewSet):
+    # AUTHENTICATION
+    permission_classes = (IsAuthenticated,) #first authenticate carrying out any transaction
+
+
     queryset = Transaction.objects.all() # Fetch all
     #queryset = Transaction.objects.select_related("currency") #fetch transactions that are related in currency
     filter_backends = (SearchFilter, OrderingFilter)
@@ -40,10 +52,12 @@ class TransactionModelViewSet(ModelViewSet):
     # oder from smallest(ascending) amount. endpoint-> http://127.0.0.1:8000/transactions/?ordering=amount
     # oder from smallest(ascending) date. endpoint-> http://127.0.0.1:8000/transactions/?ordering=date
 
-
-
     def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
             return ReadTransactionSerializer
         # else
         return WriteTransactionSerializer
+
+    # retrieve the user that has currently logged in
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
