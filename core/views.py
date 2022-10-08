@@ -26,7 +26,9 @@ class CategoryModelViewSet(ModelViewSet):
     serializer_class = CategorySerializer
 
 class TransactionModelViewSet(ModelViewSet):
-    queryset = Transaction.objects.all()
+    queryset = Transaction.objects.all() # Fetch all
+    #queryset = Transaction.objects.select_related("currency") #fetch transactions that are related in currency
+
 
     def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
