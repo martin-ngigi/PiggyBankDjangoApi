@@ -2,26 +2,60 @@
 
 # END POINTS
 import json
+from locale import currency
 
+# POSTMAN APP
 
-# 1. Retrive all categories ie GET
-# http://127.0.0.1:8000/categories/
+# CATEORY
+# ----------
+# 1.GET - Retrive all categories ie GET
+# endpoint -> http://127.0.0.1:8000/categories/
 
-# 2. Retrive single categories ie GET
-# http://127.0.0.1:8000/categories/1
+# 2. GET - Retrive single categories ie GET
+# endpoint -> http://127.0.0.1:8000/categories/1
 
-# 3. Create category ie POST
-# http://127.0.0.1:8000/categories/ (Callback url)
-
-# Then paste the following in the body after selectin type raw and json
+# 3.POST-  Create category 
+# endpoint -> http://127.0.0.1:8000/categories/ (Callback url)
+# Then paste the following in the body after selectinG type raw and json
 # {
 #     "name": "Transport"
 # }
 
-# 4. Update data i.e PATCH
-
+# 4.PATCH Update data 
 # http://127.0.0.1:8000/categories/1/
 # The select PATCH and paste following in body and select raw and JSON
 # {
 #     "name": "Transport"
 # }
+
+
+
+# CURRENCY
+# ---------
+# 1. POST . i.e. create new currency
+#  endpoint -> http://127.0.0.1:8000/currencies/
+# in body  select body, then raw then Json
+#  body ->
+#         {
+#             "code": "$",
+#             "name": "USA"
+#         }
+
+# 2. GET - Retrieve all
+# endpoint -> http://127.0.0.1:8000/currencies/
+
+# 3. GET Retrieve single currency
+# endpoint -> http://127.0.0.1:8000/currencies/2/
+
+# 4.PATCH Update data 
+# endpoint -> http://127.0.0.1:8000/currencies/2/
+# The select PATCH and paste following in body and select raw and JSON
+# {
+#     "code": "Ksh",
+#     "name": "Kenyan Currency"
+# }
+
+# 5. DELETE
+# endpoint -> http://127.0.0.1:8000/currencies/2/
+
+

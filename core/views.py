@@ -14,6 +14,10 @@ class CurrencyListAPiView(ListAPIView):
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
 
+class CurrencyModelViewSet(ModelViewSet):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer
+
 class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer

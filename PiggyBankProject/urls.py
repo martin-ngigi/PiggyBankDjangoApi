@@ -19,9 +19,10 @@ from core import views
 from rest_framework import routers
 
 router = routers.SimpleRouter()
+router.register(r'currencies', views.CurrencyModelViewSet, basename="currency")
 router.register(r'categories', views.CategoryModelViewSet, basename="category")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("currencies/", views.CurrencyListAPiView.as_view(), name="currencies")
+    #path("currencies/", views.CurrencyListAPiView.as_view(), name="currencies")
 ] + router.urls
