@@ -6,7 +6,7 @@ from rest_framework.response  import Response
 from rest_framework import status
 
 from core.models import Category, Currency, Transaction
-from core.serializers import CategorySerializer, CurrencySerializer, TransactionSerializer
+from core.serializers import CategorySerializer, CurrencySerializer, ReadTransactionSerializer, WriteTransactionSerializer
 
 # Create your views here.
 
@@ -27,4 +27,9 @@ class CategoryModelViewSet(ModelViewSet):
 
 class TransactionModelViewSet(ModelViewSet):
     queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+
+    def get_serializer_class(self):
+        if self.action in ("list", "retrieve"):
+            return ReadTransactionSerializer
+        # else
+        return WriteTransactionSerializer

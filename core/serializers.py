@@ -17,7 +17,41 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
-class TransactionSerializer(serializers.ModelSerializer):
+class WriteTransactionSerializer(serializers.ModelSerializer):
+    # While inserting currency, intead of using id of currency, use text instead and afterwards display all currencies in text form
+    # eg 
+    #     {
+    #     "currency": "Ksh",
+    #     "amount": "20.00",
+    #     "date": "2022-08-10T09:22:33Z",
+    #     "description": "Testing Kenyan currency",
+    #     "category": 3
+    # }
+    currency = serializers.SlugRelatedField(slug_field="code", queryset=Currency.objects.all())
+
     class Meta:
         model = Transaction
         fields = '__all__'
+
+class ReadTransactionSerializer(serializers.ModelSerializer):
+    # the GET Will return TransactionSerializer and CurrencySerializer inside of TransactionSerializer in the "currency":""
+    # eg
+    #   {
+    #     "id": 1,
+    #     "currency": {
+    #         "id": 2,
+    #         "code": "Ksh",
+    #         "name": "Kenyan Currency"
+    #     },
+    #     "amount": "30.00",
+    #     "date": "2022-08-10T09:22:33Z",
+    #     "description": "Testing USA currency",
+    #     "category": 3
+    # },
+    currency = CurrencySerializer()
+
+    class Meta:
+        model = Transaction
+        fields = '__all__'
+
+    read_only_fields = fields
