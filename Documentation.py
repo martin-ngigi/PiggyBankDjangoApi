@@ -37,8 +37,8 @@ from locale import currency
 # in body  select body, then raw then Json
 #  body ->
 #         {
-#             "code": "$",
-#             "name": "USA"
+#             "code": "USD",
+#             "name": "US Dollars"
 #         }
 
 # 2. GET - Retrieve all
@@ -57,5 +57,42 @@ from locale import currency
 
 # 5. DELETE
 # endpoint -> http://127.0.0.1:8000/currencies/2/
+
+
+
+
+# TRANSACTIONS
+# ---------
+# 1. POST . i.e. create new transactions
+#  endpoint -> http://127.0.0.1:8000/transactions/
+# in body  select body, then raw then Json
+#  body ->
+#         {
+#               "amount":1000,
+#               "currency": 2,
+#               "date": "2022-08-10 09:13:00",
+#               "description": "Testing Kenyan currency",
+#               "category": 2
+#           }
+
+# 2. GET - Retrieve all
+# endpoint -> 127.0.0.1:8000/transactions/
+
+# 3. GET Retrieve single currency
+# endpoint -> 127.0.0.1:8000/transactions/1/
+
+# 4.PATCH Update data 
+# endpoint -> http://127.0.0.1:8000/transactions/2/
+# The select PATCH and paste following in body and select raw and JSON
+#         {
+#               "amount":1000,
+#               "currency": 2,
+#               "date": "2022-08-10 09:13:00",
+#               "description": "Testing Kenyan currency",
+#               "category": 2
+#           }
+
+# 5. DELETE
+# endpoint -> http://127.0.0.1:8000/transactions/2/
 
 
